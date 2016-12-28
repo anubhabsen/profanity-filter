@@ -1,4 +1,5 @@
 <?php
+	require_once 'inc/connect.inc.php';
 	if(!isset($_POST['sentence']))
 	{
 		header("Location : index.php");

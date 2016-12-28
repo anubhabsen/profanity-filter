@@ -21,7 +21,9 @@
 		}
 		else if($check == "custom")
 		{
-			$key = 'test';
+			$key = $_POST['list'];
+			$key = preg_replace("/[^a-zA-Z 0-9]+/", " ", $key);
+			$key_split =explode(" ", $key);
 			$sentence = preg_replace("/[^a-zA-Z 0-9]+/", " ", $sentence);
 			$sent_split = explode(" ", $sentence);
 			if (in_array($key, $sent_split))

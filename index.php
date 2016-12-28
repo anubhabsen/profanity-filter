@@ -9,6 +9,9 @@
         <br>
         <label><input type="radio" name="checktype" id="custom" value="custom">Custom check</label>
         <br>
+        Custom list:
+        <input name="list" type="text" id="list">
+        <br>
         <input type="submit" name="Submit" value="GO">
     </form>
 </html>

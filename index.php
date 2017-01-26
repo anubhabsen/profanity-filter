@@ -7,7 +7,9 @@
         <br>
         <label><input type="radio" name="checktype" id="standard" value="standard">Standard check</label>
         <br>
-        <label><input type="radio" name="checktype" id="custom" value="custom">Custom check</label>
+        <label><input type="radio" name="checktype" id="createcustom" value="createcustom">Create Custom check</label>
+        <br>
+        <label><input type="radio" name="checktype" id="rmselect" value="rmselect">Remove Select</label>
         <br>
         Custom list:
         <input name="list" type="text" id="list">

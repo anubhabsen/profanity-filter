@@ -1,8 +1,8 @@
 <html>
     <form method="POST" action="check.php">
-        <strong><center>Enter sentence to check</cemter></strong>
+        <strong><center>Enter text to check</cemter></strong>
         <br>
-        Sentence:
+        Text:
         <input name="sentence" type="text" id="Sentence">
         <br>
         <label><input type="radio" name="checktype" id="standard" value="standard">Standard check</label>

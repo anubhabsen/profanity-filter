@@ -25,9 +25,9 @@
 		}
 		else if($check == "createcustom")
 		{
+			$list= $_POST['list'];
 			$list = preg_replace("/[^a-zA-Z 0-9]+/", " ", $list);
 			$list_split =explode(" ", $list);
-			print_r($list_split);
 			foreach ($list_split as $key => $word)
 			{
 				$q1 = "SELECT * FROM `profane` WHERE `word`='$word'";
@@ -71,8 +71,8 @@
 			else if($check == "rmselect")
 			{
 				$list = $_POST['list'];
+				$list = preg_replace("/[^a-zA-Z 0-9]+/", " ", $list);
 				$list_split =explode(" ", $list);
-				print_r($list_split);
 				$sentence = preg_replace("/[^a-zA-Z 0-9]+/", " ", $sentence);
 				$sent_split = explode(" ", $sentence);
 				foreach($list_split as $key => $word)

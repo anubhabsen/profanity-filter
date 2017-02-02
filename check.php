@@ -15,104 +15,53 @@
 			$url = "http://www.wdylike.appspot.com/?q=".$sentence;
 			$res = getCurl($url);
 			if($res == "false")
-			{
-				echo "The sentence is safe.";
-			}
+				echo "Sentence entered is safe!";
 			else
+				echo "Sentence entered contains a profanity.";
+		}
+		else if($check == "rmselect")
+		{
+			$list = $_POST['list'];
+			$list_split = explode(" ", $list);
+			$sentence = preg_replace("/[^a-zA-Z 0-9]+/", " ", $sentence);
+			$sent_split = explode(" ", $sentence);
+			foreach($list_split as $key => $word)
 			{
-				echo "Profanity detected in the sentence.";
+				if(in_array($word, $sent_split))
+				{
+				   echo "Sentence entered contains a profanity.";
+				}
+				else
+				{
+				   echo "Sentence entered is safe!";
+				}
 			}
 		}
 		else if($check == "createcustom")
 		{
-			$list= $_POST['list'];
-			$list = preg_replace("/[^a-zA-Z 0-9]+/", " ", $list);
-			$list_split =explode(" ", $list);
-			foreach ($list_split as $key => $word)
+			$sentence = preg_replace("/[^a-zA-Z 0-9]+/", " ", $sentence);
+			$sent_split = explode(" ", $sentence);
+			$flag=0;
+			foreach($sent_split as $key => $word)
 			{
-				$q1 = "SELECT * FROM `profane` WHERE `word`='$word'";
-				if($query_run = mysqli_query($connection,$q1))
+				$q3 = "SELECT * FROM `profane` WHERE `word` = '$word'";
+				if($query_run = mysqli_query($connection, $q3))
 				{
-					if(mysqli_num_rows($query_run) == 1 )
+					if(mysqli_num_rows($query_run) == 1)
 					{
-						// Nothing to be done
+						echo "Sentence entered contains a profanity.";
+						$flag = 1;
+						break;
 					}
 					else
 					{
-						$q2= "INSERT INTO `profane` (`word`) VALUES ('$word')";
-						mysqli_query($connection,$q2);
-					}
-
-				}
-			}
-		}
-		else if($check == "custom")
-		{
-			$list = $_POST['list'];
-			$list = preg_replace("/[^a-zA-Z 0-9]+/", " ", $list);
-			$list_split =explode(" ", $list);
-			foreach ($list_split as $key => $word)
-			{
-				$q1 = "SELECT * FROM `profane` WHERE `word`='$word'";
-				if($query_run = mysqli_query($connection, $q1))
-				{
-					if(mysqli_num_rows($query_run) == 1 )
-					{
-
-					}
-					else
-					{
-						$q2 = "INSERT INTO `profane` (`word`) VALUES ('$word')";
-						mysqli_query($connection, $q2);
-					}
-
-				}
-			}
-			else if($check == "rmselect")
-			{
-				$list = $_POST['list'];
-				$list = preg_replace("/[^a-zA-Z 0-9]+/", " ", $list);
-				$list_split =explode(" ", $list);
-				$sentence = preg_replace("/[^a-zA-Z 0-9]+/", " ", $sentence);
-				$sent_split = explode(" ", $sentence);
-				foreach($list_split as $key => $word)
-				{
-					if (in_array($word, $sent_split))
-					{
-					   echo "Profanity detected in sentence";
-					}
-					else
-					{
-					   echo "Sentence is safe";
+						// Nothing to do
 					}
 				}
 			}
-			if($check =="createcustom")
+			if($flag==0)
 			{
-				$sentence = preg_replace("/[^a-zA-Z 0-9]+/", " ", $sentence);
-				$sent_split = explode(" ", $sentence);
-				$flag = 0;
-				foreach($sent_split as $key => $word)
-				{
-					$q3 = "SELECT * FROM `profane` WHERE `word`='$word'";
-					if($query_run = mysqli_query($connection, $q3))
-					{
-						if(mysqli_num_rows($query_run) == 1 )
-						{
-							echo "Profanity detected in sentence";
-							$flag = 1;
-							break;
-						}
-						else
-						{
-							// Nothing
-						}
-					}
-				}
-				if ($flag == 0)
-				{
-					echo "Sentence is safe";
-				}
+				echo "Sentence entered is safe!";
 			}
 		}
 	}
